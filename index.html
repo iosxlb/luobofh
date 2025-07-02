@@ -102,7 +102,20 @@
   </div>
 
   <script>
-    (
+    (function() {
+      // 白名单域名配置（预留位置方便后期添加）
+      const WHITELIST_CONFIG = {
+        domains: [
+          'lbbb.cc',
+          'bbyun.top',
+          'ios.lat',
+          // 预留位置：在此添加新的白名单域名
+          // 'example.com',
+          // 'another-domain.net'
+        ],
+        // 预留其他配置项
+        watermarkText: '提示：请联系iOS小萝卜授权'
+      };
 
       // 显示三点加载动画
       function showLoadingAnimation() {
