@@ -230,21 +230,27 @@
       btn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 生成中...';
 
       setTimeout(() => {
-        var encodedUrl = base64Encode(url);
-        var resultUrl = `https://iosxlb.github.io/luobofh/ink.htm?c=${encodedUrl}`;
-        document.getElementById('output').textContent = resultUrl;
-        document.getElementById('result').classList.remove('hidden');
-        // 生成二维码
-        var qrcodeDiv = document.getElementById('qrcode');
-        qrcodeDiv.innerHTML = "";
-        new QRCode(qrcodeDiv, {
-          text: resultUrl,
-          width: Math.min(180, window.innerWidth * 0.65),
-          height: Math.min(180, window.innerWidth * 0.65),
-          colorDark: qrcolor,
-          colorLight: "#ffffff",
-          correctLevel: QRCode.CorrectLevel.H
-        });
+          var encodedUrl = base64Encode(url);
+          // 获取当前域名和路径（自动适应开发和生产环境）
+          var currentDomain = window.location.origin;
+          var currentPath = window.location.pathname.split('/').slice(0, -1).join('/') || '';
+          var resultUrl = `${currentDomain}${currentPath}/ink.htm?c=${encodedUrl}`;
+          
+          document.getElementById('output').textContent = resultUrl;
+          document.getElementById('result').classList.remove('hidden');
+          
+          // 生成二维码
+          var qrcodeDiv = document.getElementById('qrcode');
+          qrcodeDiv.innerHTML = "";
+          new QRCode(qrcodeDiv, {
+              text: resultUrl,
+              width: Math.min(180, window.innerWidth * 0.65),
+              height: Math.min(180, window.innerWidth * 0.65),
+              colorDark: qrcolor,
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.H
+          });
+      });
 
         btn.disabled = false;
         btn.innerHTML = '<i class="fa fa-magic mr-2"></i> 生成防红链接';
